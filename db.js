@@ -6,8 +6,12 @@ const path = require('path');
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  // ssl: { rejectUnauthorized: false } // descomente se necessário (ex: Heroku)
+  ssl: { rejectUnauthorized: false } // descomente se necessário (ex: Heroku)
 });
+
+// // Determina se precisa habilitar SSL (Heroku / RDS costumam precisar)
+// const needSsl = process.env.NODE_ENV === 'production' ||
+//                 (databaseUrl && /amazonaws|heroku|ec2|render/.test(databaseUrl));
 
 async function applyMigrations() {
   try {
