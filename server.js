@@ -6,6 +6,21 @@ const { body, validationResult } = require('express-validator');
 const db = require('./db');
 
 const app = express();
+
+// Carrega o arquivo .env de acordo com o ambiente (se necessário)
+if (process.env.NODE_ENV === 'production') {
+    require("dotenv").config({ path: '.env.production' });
+  } else {
+    require("dotenv").config({ path: '.env.development' });
+  }
+
+// Defina a URL dependendo do ambiente
+const hostUrl = process.env.NODE_ENV === 'development'
+  ? 'localhost:3000'
+  : 'hubnutri-api-174e7abb5d94.herokuapp.com';
+
+  const scheme = process.env.NODE_ENV === 'development' ? 'http' : 'https';
+
 const PORT = process.env.PORT || 3000;
 
 app.use(cors());
