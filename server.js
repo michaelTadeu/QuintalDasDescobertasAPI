@@ -1,11 +1,5 @@
 // server.js
 require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
-const { body, validationResult } = require('express-validator');
-const db = require('./db');
-
-const app = express();
 
 // Carrega o arquivo .env de acordo com o ambiente (se necessário)
 if (process.env.NODE_ENV === 'production') {
@@ -14,12 +8,18 @@ if (process.env.NODE_ENV === 'production') {
     require("dotenv").config({ path: '.env.development' });
   }
 
+const express = require('express');
+const cors = require('cors');
+const { body, validationResult } = require('express-validator');
+const db = require('./db');
+const app = express();
+
 // Defina a URL dependendo do ambiente
 const hostUrl = process.env.NODE_ENV === 'development'
   ? 'localhost:3000'
-  : 'hubnutri-api-174e7abb5d94.herokuapp.com';
+  : 'quintasdasdescobertasapi-e4035394de2a.herokuapp.com';
 
-  const scheme = process.env.NODE_ENV === 'development' ? 'http' : 'https';
+const scheme = process.env.NODE_ENV === 'development' ? 'http' : 'https';
 
 const PORT = process.env.PORT || 3000;
 
