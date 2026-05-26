@@ -17,7 +17,7 @@ const app = express();
 // Defina a URL dependendo do ambiente
 const hostUrl = process.env.NODE_ENV === 'development'
   ? 'localhost:3000'
-  : 'quintasdasdescobertasapi-e4035394de2a.herokuapp.com';
+  : 'https://quintaldasdescobertasapi.onrender.com';
 
 const scheme = process.env.NODE_ENV === 'development' ? 'http' : 'https';
 
