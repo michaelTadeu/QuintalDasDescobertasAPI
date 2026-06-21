@@ -18,15 +18,18 @@ const needSsl = process.env.NODE_ENV === 'production' ||
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false
-  }
+  ssl: process.env.NODE_ENV === 'production'
+    ? { rejectUnauthorized: false }
+    : false,
+  max: 5,
+  idleTimeoutMillis: 30000,
+  connectionTimeoutMillis: 10000
 });
 
-// Log de erro do pool (útil no Heroku)
 pool.on('error', (err) => {
   console.error('Unexpected error on pg Pool', err);
 });
+
 
 /**
  * Aplica migrations lendo o arquivo migrations.sql (se existir).
