@@ -28,7 +28,7 @@ app.use(express.json());
 
 (async () => {
   try {
-    await db.applyMigrations();
+    // await db.applyMigrations();
     console.log('DB pronta.');
   } catch (err) {
     console.error('Falha ao inicializar DB', err);
