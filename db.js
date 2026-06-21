@@ -11,9 +11,16 @@ const databaseUrl = process.env.DATABASE_URL || null;
 const needSsl = process.env.NODE_ENV === 'production' ||
                 (databaseUrl && /amazonaws|heroku|ec2|render/.test(databaseUrl));
 
+// const pool = new Pool({
+//   connectionString: databaseUrl,
+//   ...(needSsl ? { ssl: { rejectUnauthorized: false } } : {})
+// });
+
 const pool = new Pool({
-  connectionString: databaseUrl,
-  ...(needSsl ? { ssl: { rejectUnauthorized: false } } : {})
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
 
 // Log de erro do pool (útil no Heroku)
